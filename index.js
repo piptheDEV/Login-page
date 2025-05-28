@@ -1,18 +1,18 @@
-// index.js
-import express from "express";
+import express from 'express';
+import path from 'path';
+import { "https://github.com/piptheDEV/Login-page/blob/main/public/index.html" } from 'url';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
-app.use(express.json());
+// Setup for ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-app.post("/send", (req, res) => {
-  const { username, password } = req.body;
-  console.log("Username:", username);
-  console.log("Password:", password);
-  res.send("Data received");
-});
+// Serve static files from the 'public' folder
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
 });
